@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TheRequest from '@/components/request/TheRequest.vue'
+</script>
 
 <template>
-  <main>
-    <div class="text-9xl text-amber-800">hello world</div>
-  </main>
+  <div class="h-screen bg-stone-900 p-10 text-orange-100">
+    <TheRequest />
+  </div>
 </template>
