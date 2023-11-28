@@ -30,7 +30,7 @@ function clickOutside() {
         >
         <button
           v-click-outside="clickOutside"
-          class="z-10 inline-flex w-1/12 flex-shrink-0 items-center justify-between rounded-s-lg border border-e-0 border-gray-300 bg-gray-100 px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+          class="z-10 inline-flex w-1/12 flex-shrink-0 items-center justify-between rounded-s-lg border border-e-0 border-gray-300 bg-gray-100 px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-700"
           type="button"
           @click="onClickHttpMethod"
         >

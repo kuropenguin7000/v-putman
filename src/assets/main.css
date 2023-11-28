@@ -5,3 +5,7 @@
 body {
     overflow: hidden;
 }
+
+body * {
+    @apply transition-all duration-700;
+}
