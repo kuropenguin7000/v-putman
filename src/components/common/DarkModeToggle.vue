@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Ref } from 'vue'
+import { useDarkStore } from '@/stores/dark'
 
 const isDarkMode: Ref<boolean> = ref(false)
+const store = useDarkStore()
 
 function toggleDarkMode() {
   isDarkMode.value = !isDarkMode.value
+  store.$patch(state => {
+    state.darkMode = isDarkMode.value
+  })
   document.documentElement.classList.toggle('dark', isDarkMode.value)
 }
 </script>
