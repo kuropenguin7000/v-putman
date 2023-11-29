@@ -16,7 +16,6 @@ function toggleDarkMode() {
 </script>
 
 <template>
-  <div></div>
   <label
     for="check"
     :class="`${
