@@ -9,7 +9,7 @@ const store = useDarkStore()
 <template>
   <div
     :class="`h-screen ${
-      store.getDarkMode ? 'bg-[#282828]' : 'bg-[#FFFFFF]'
+      store.getDarkMode ? 'bg-dark-primary' : 'bg-white'
     } p-10 text-orange-100`"
   >
     <DarkModeToggle />

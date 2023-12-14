@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { httpStatusList } from '@/constants/http-status'
+import ChevronDown from '@/components/icons/ChevronDown.vue'
 
 const url: Ref<string> = ref('')
 const selectedHttpStatus: Ref<string> = ref('GET')
@@ -30,33 +31,19 @@ function clickOutside() {
         >
         <button
           v-click-outside="clickOutside"
-          class="z-10 inline-flex w-1/12 flex-shrink-0 items-center justify-between rounded-s-lg border border-e-0 border-gray-300 bg-gray-100 px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-700"
+          class="dark:bg-dark-primary z-10 inline-flex w-1/12 flex-shrink-0 items-center justify-between rounded-s-lg border border-e-0 border-gray-300 bg-gray-100 px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-600 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-700"
           type="button"
           @click="onClickHttpMethod"
         >
           {{ selectedHttpStatus }}
-          <svg
-            class="ms-2.5 h-2.5 w-2.5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 10 6"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 4 4 4-4"
-            />
-          </svg>
+          <ChevronDown />
         </button>
         <div class="relative w-full">
           <input
             v-model="url"
             type="search"
             id="search-dropdown"
-            class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-e-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500"
+            class="rounded-s-gray-100 rounded-s-2 dark:bg-dark-primary z-20 block w-full rounded-e-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500"
             placeholder="Enter URL or paste text"
             required
           />
