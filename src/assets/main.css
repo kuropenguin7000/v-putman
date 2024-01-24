@@ -3,9 +3,5 @@
 @tailwind utilities;
 
 body {
-    overflow: hidden;
-}
-
-body * {
-    @apply transition-all duration-700;
+  overflow: hidden;
 }

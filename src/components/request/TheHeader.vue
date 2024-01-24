@@ -3,13 +3,14 @@ import { ref, reactive } from 'vue'
 import type { Ref } from 'vue'
 import { httpStatusList } from '@/constants/http-status'
 import ChevronDown from '@/components/icons/ChevronDown.vue'
+import { useCommonStore } from '@/stores/common'
 
 interface HttpStatus {
   name: string
   color: string
 }
 
-const url: Ref<string> = ref('')
+const store = useCommonStore()
 const selectedHttpStatus: HttpStatus = reactive({
   name: 'GET',
   color: 'text-[#6BDD9A]'
@@ -20,7 +21,7 @@ const httpStatusDropdown = ref<HTMLInputElement | null>(null)
 function onClickHttpMethod(): void {
   isDropdownVisible.value = !isDropdownVisible.value
 }
-function handleDropdownClick(httpStatus): void {
+function handleDropdownClick(httpStatus: HttpStatus): void {
   selectedHttpStatus.name = httpStatus.name
   selectedHttpStatus.color = httpStatus.color
 }
@@ -47,13 +48,11 @@ function clickOutside() {
           <label :class="selectedHttpStatus.color">
             {{ selectedHttpStatus.name }}
           </label>
-          <div class="text-[#A6A6A6]">
-            <ChevronDown />
-          </div>
+          <ChevronDown class="text-[#A6A6A6]" />
         </button>
         <div class="relative w-full">
           <input
-            v-model="url"
+            v-model="store.endpoint"
             type="search"
             id="search-dropdown"
             class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-e-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-dark-primary dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500"
@@ -72,7 +71,7 @@ function clickOutside() {
     <div
       v-if="isDropdownVisible"
       ref="httpStatusDropdown"
-      class="z-10 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700"
+      class="absolute z-10 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700"
     >
       <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
         <li v-for="httpStatus in httpStatusList" :key="httpStatus.name">

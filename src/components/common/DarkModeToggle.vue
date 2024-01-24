@@ -29,7 +29,7 @@ function toggleDarkMode() {
       @click="toggleDarkMode"
     />
     <span
-      class="bg-sun peer-checked:bg-moon absolute left-2 top-2 h-4/6 w-2/6 rounded-full bg-cover bg-no-repeat transition-all duration-500 peer-checked:left-16"
+      class="absolute left-2 top-2 h-4/6 w-2/6 rounded-full bg-sun bg-cover bg-no-repeat transition-all duration-500 peer-checked:left-16 peer-checked:bg-moon"
     ></span>
   </label>
 </template>
