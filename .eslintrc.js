@@ -26,7 +26,5 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['@typescript-eslint', 'vue'],
-  rules: {
-    'arrow-body-style': ['error', 'always']
-  }
+  rules: {}
 }

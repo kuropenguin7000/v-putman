@@ -47,6 +47,6 @@
     "vue-tsc": "^1.8.19"
   },
   "lint-staged": {
-    "*.js": "prettier --write"
+    "*.{js,ts,vue}": ["eslint --fix","prettier --write"]
   }
 }

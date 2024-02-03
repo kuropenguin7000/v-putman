@@ -5,9 +5,7 @@ import DarkModeToggle from '@/components/common/DarkModeToggle.vue'
 import { useDarkStore } from '@/stores/dark'
 
 const store = useDarkStore()
-let foo = () => {
-  return 0
-}
+let foo = () => 0
 </script>
 
 <template>
