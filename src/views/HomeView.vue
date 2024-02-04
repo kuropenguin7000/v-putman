@@ -5,7 +5,6 @@ import DarkModeToggle from '@/components/common/DarkModeToggle.vue'
 import { useDarkStore } from '@/stores/dark'
 
 const store = useDarkStore()
-let foo = () => 0
 </script>
 
 <template>
@@ -14,7 +13,6 @@ let foo = () => 0
       store.getDarkMode ? 'bg-dark-primary' : 'bg-white'
     } p-10 text-white`"
   >
-    {{ foo }}
     <DarkModeToggle />
     <TheHeader />
     <div class="flex justify-between gap-3">
