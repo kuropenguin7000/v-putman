@@ -1,89 +1,52 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import type { Ref } from 'vue'
-import { httpStatusList } from '@/constants/http-status'
-import ChevronDown from '@/components/icons/ChevronDown.vue'
+import { ref } from 'vue'
 import { useCommonStore } from '@/stores/common'
-
-interface HttpStatus {
-  name: string
-  color: string
-}
+import Button from 'primevue/button'
+import InputText from 'primevue/inputtext'
+import Dropdown from 'primevue/dropdown'
 
 const store = useCommonStore()
-const selectedHttpStatus: HttpStatus = reactive({
-  name: 'GET',
-  color: 'text-[#6BDD9A]'
-})
-const isDropdownVisible: Ref<boolean> = ref(false)
-const httpStatusDropdown = ref<HTMLInputElement | null>(null)
-
-function onClickHttpMethod(): void {
-  isDropdownVisible.value = !isDropdownVisible.value
-}
-function handleDropdownClick(httpStatus: HttpStatus): void {
-  selectedHttpStatus.name = httpStatus.name
-  selectedHttpStatus.color = httpStatus.color
-}
-function clickOutside() {
-  isDropdownVisible.value = false
-}
+const selectedHttpStatus = ref({ name: 'GET', color: 'text-[#6BDD9A]' })
+const httpStatusList = ref([
+  { name: 'GET', color: 'text-[#6BDD9A]' },
+  { name: 'POST', color: 'text-[#FFE47E]' },
+  { name: 'PUT', color: 'text-[#74AEF6]' },
+  { name: 'PATCH', color: 'text-[#C0A8E1]' },
+  { name: 'DELETE', color: 'text-[#F79A8E]' },
+  { name: 'HEAD', color: 'text-[#6BDD9A]' },
+  { name: 'OPTIONS', color: 'text-[#F15EB0]' }
+])
 </script>
 
 <template>
-  <div>
-    <form>
-      <div class="flex pb-2">
-        <label
-          for="search-dropdown"
-          class="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Your Email</label
-        >
-        <button
-          v-click-outside="clickOutside"
-          class="z-10 inline-flex w-1/12 flex-shrink-0 items-center justify-between rounded-s-lg border border-e-0 border-gray-300 bg-gray-100 px-4 py-2.5 text-center text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:border-gray-600 dark:bg-dark-primary dark:hover:bg-gray-700 dark:focus:ring-blue-700"
-          type="button"
-          @click="onClickHttpMethod"
-        >
-          <label :class="selectedHttpStatus.color">
-            {{ selectedHttpStatus.name }}
-          </label>
-          <ChevronDown class="text-[#A6A6A6]" />
-        </button>
-        <div class="relative w-full">
-          <input
-            v-model="store.endpoint"
-            type="search"
-            id="search-dropdown"
-            class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-e-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-dark-primary dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500"
-            placeholder="Enter URL or paste text"
-            required
-          />
-          <button
-            type="submit"
-            class="absolute end-0 top-0 h-full w-1/12 rounded-e-lg border border-blue-700 bg-blue-700 p-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Send
-          </button>
-        </div>
-      </div>
-    </form>
-    <div
-      v-if="isDropdownVisible"
-      ref="httpStatusDropdown"
-      class="absolute z-10 w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700"
+  <div class="mb-3 flex w-full items-center gap-2">
+    <Dropdown
+      class="md:w-44"
+      v-model="selectedHttpStatus"
+      :options="httpStatusList"
+      optionLabel="name"
+      :pt="{
+        wrapper: { style: { 'max-height': '500px' } }
+      }"
     >
-      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-        <li v-for="httpStatus in httpStatusList" :key="httpStatus.name">
-          <a
-            class="block px-4 py-2 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            :class="httpStatus.color"
-            @click="handleDropdownClick(httpStatus)"
-          >
-            {{ httpStatus.name }}
-          </a>
-        </li>
-      </ul>
-    </div>
+      <template #value="slotProps">
+        <div class="align-items-center flex">
+          <div :class="slotProps.value.color">{{ slotProps.value.name }}</div>
+        </div>
+      </template>
+      <template #option="slotProps">
+        <div class="flex items-center">
+          <div :class="slotProps.option.color">{{ slotProps.option.name }}</div>
+        </div>
+      </template>
+    </Dropdown>
+    <InputText
+      v-model="store.endpoint"
+      type="text"
+      size="small"
+      placeholder="Enter URL or paste text"
+      class="w-full"
+    />
+    <Button size="small" label="Send" class="w-32" />
   </div>
 </template>
