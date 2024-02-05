@@ -1,52 +1,89 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useCommonStore } from '@/stores/common'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
-import Dropdown from 'primevue/dropdown'
 
-const store = useCommonStore()
-const selectedHttpStatus = ref({ name: 'GET', color: 'text-[#6BDD9A]' })
-const httpStatusList = ref([
-  { name: 'GET', color: 'text-[#6BDD9A]' },
-  { name: 'POST', color: 'text-[#FFE47E]' },
-  { name: 'PUT', color: 'text-[#74AEF6]' },
-  { name: 'PATCH', color: 'text-[#C0A8E1]' },
-  { name: 'DELETE', color: 'text-[#F79A8E]' },
-  { name: 'HEAD', color: 'text-[#6BDD9A]' },
-  { name: 'OPTIONS', color: 'text-[#F15EB0]' }
-])
+interface Headers {
+  key: string
+  value: string
+}
+
+const headerKey = ref()
+const headerValue = ref()
+const headers = ref<Headers[]>([])
+const columns = [
+  { field: 'key', header: 'Key' },
+  { field: 'value', header: 'Value' },
+  { field: 'remove', header: '' }
+]
+const removeRow = (key: string) => {
+  const indexToRemove = headers.value.findIndex(obj => obj.key === key)
+  if (indexToRemove !== -1) {
+    headers.value.splice(indexToRemove, 1)
+  }
+}
+const addRow = () => {
+  if (headerKey.value && headerValue.value) {
+    headers.value.push({
+      key: headerKey.value,
+      value: headerValue.value
+    })
+    headerKey.value = ''
+    headerValue.value = ''
+  }
+}
 </script>
 
 <template>
-  <div class="mb-3 flex w-full items-center gap-2">
-    <Dropdown
-      class="md:w-44"
-      v-model="selectedHttpStatus"
-      :options="httpStatusList"
-      optionLabel="name"
-      :pt="{
-        wrapper: { style: { 'max-height': '500px' } }
-      }"
-    >
-      <template #value="slotProps">
-        <div class="align-items-center flex">
-          <div :class="slotProps.value.color">{{ slotProps.value.name }}</div>
-        </div>
-      </template>
-      <template #option="slotProps">
-        <div class="flex items-center">
-          <div :class="slotProps.option.color">{{ slotProps.option.name }}</div>
-        </div>
-      </template>
-    </Dropdown>
-    <InputText
-      v-model="store.endpoint"
-      type="text"
+  <div>
+    <div class="mb-5 flex gap-5">
+      <InputText
+        v-model="headerKey"
+        type="text"
+        size="small"
+        placeholder="Header key"
+      />
+      <InputText
+        v-model="headerValue"
+        type="text"
+        size="small"
+        placeholder="Header value"
+      />
+      <Button
+        icon="pi pi-plus"
+        size="small"
+        text
+        rounded
+        aria-label="Add"
+        @click="addRow"
+      />
+    </div>
+    <DataTable
+      v-if="headers.length"
+      :value="headers"
       size="small"
-      placeholder="Enter URL or paste text"
-      class="w-full"
-    />
-    <Button size="small" label="Send" class="w-32" />
+      scrollable
+      scrollHeight="370px"
+      tableStyle="min-width: 20rem"
+    >
+      <Column
+        v-for="col of columns"
+        :key="col.field"
+        :field="col.field"
+        :header="col.header"
+        :style="col.field === 'remove' ? 'width: 5rem' : ''"
+        ><template v-if="col.field === 'remove'" #body="slotProps">
+          <Button
+            icon="pi pi-times"
+            severity="danger"
+            size="small"
+            text
+            rounded
+            aria-label="Remove"
+            @click="removeRow(slotProps.data.key)" /></template
+      ></Column>
+    </DataTable>
   </div>
 </template>

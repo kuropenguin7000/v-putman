@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import TheBody from '@/components/request/TheBody.vue'
-import TheHeader from '@/components/request/TheHeader.vue'
+import TheRequest from '@/components/request/TheRequest.vue'
+import EndpointSection from '@/components/request/EndpointSection.vue'
 import DarkModeToggle from '@/components/common/DarkModeToggle.vue'
+import Divider from 'primevue/divider'
 import { useDarkStore } from '@/stores/dark'
 
 const store = useDarkStore()
@@ -14,18 +15,11 @@ const store = useDarkStore()
     } p-10 text-white`"
   >
     <DarkModeToggle />
-    <TheHeader />
-    <div class="flex justify-between gap-3">
-      <div
-        class="h-[530px] w-full rounded-lg border border-gray-300 p-3 dark:border-gray-600"
-      >
-        <TheBody />
-      </div>
-      <div
-        class="h-[530px] w-full rounded-lg border border-gray-300 p-3 dark:border-gray-600"
-      >
-        response component
-      </div>
+    <EndpointSection />
+    <div class="flex h-5/6 w-full justify-between">
+      <TheRequest />
+      <Divider layout="vertical" />
+      <div class="w-full">response</div>
     </div>
   </div>
 </template>

@@ -9,6 +9,7 @@ import { clickOutside } from './directives/click-outside'
 import PrimeVue from 'primevue/config'
 // @ts-expect-error prime vue preset
 import Lara from './presets/lara'
+import 'primeicons/primeicons.css'
 
 const app = createApp(App)
 
