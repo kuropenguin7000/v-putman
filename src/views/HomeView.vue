@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import TheRequest from '@/components/request/TheRequest.vue'
+import TheResponse from '@/components/response/TheResponse.vue'
 import EndpointSection from '@/components/request/EndpointSection.vue'
 import DarkModeToggle from '@/components/common/DarkModeToggle.vue'
 import Divider from 'primevue/divider'
+import Toast from 'primevue/toast'
 import { useDarkStore } from '@/stores/dark'
 
 const store = useDarkStore()
@@ -14,12 +16,13 @@ const store = useDarkStore()
       store.getDarkMode ? 'bg-dark-primary' : 'bg-white'
     } p-10 text-white`"
   >
+    <Toast position="bottom-left" />
     <DarkModeToggle />
     <EndpointSection />
     <div class="flex h-5/6 w-full justify-between">
       <TheRequest />
       <Divider layout="vertical" />
-      <div class="w-full">response</div>
+      <TheResponse />
     </div>
   </div>
 </template>

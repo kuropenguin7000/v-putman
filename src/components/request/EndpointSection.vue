@@ -4,7 +4,9 @@ import { useCommonStore } from '@/stores/common'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Dropdown from 'primevue/dropdown'
+import { useToast } from 'primevue/usetoast'
 
+const toast = useToast()
 const store = useCommonStore()
 const selectedHttpStatus = ref({ name: 'GET', color: 'text-[#6BDD9A]' })
 const httpStatusList = ref([
@@ -16,6 +18,26 @@ const httpStatusList = ref([
   { name: 'HEAD', color: 'text-[#6BDD9A]' },
   { name: 'OPTIONS', color: 'text-[#F15EB0]' }
 ])
+const fetchAPI = () => {
+  const success = (res: void) => {
+    store.response = res
+    toast.add({
+      severity: 'success',
+      summary: 'Success fetch API',
+      detail: 'Successfully get the response',
+      life: 3000
+    })
+  }
+  const failed = () => {
+    toast.add({
+      severity: 'error',
+      summary: 'Error fetch API',
+      detail: 'Please check the network tab for more detail',
+      life: 3000
+    })
+  }
+  store.fetchTheApi(success, failed)
+}
 </script>
 
 <template>
@@ -47,6 +69,6 @@ const httpStatusList = ref([
       placeholder="Enter URL or paste text"
       class="w-full"
     />
-    <Button size="small" label="Send" class="w-32" />
+    <Button size="small" label="Send" class="w-32" @click="fetchAPI" />
   </div>
 </template>

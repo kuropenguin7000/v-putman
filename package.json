@@ -17,6 +17,7 @@
     "primeicons": "^6.0.1",
     "primevue": "^3.47.2",
     "vue": "^3.3.13",
+    "vue-json-pretty": "^2.3.0",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
