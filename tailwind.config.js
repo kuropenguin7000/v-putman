@@ -32,7 +32,8 @@ export default {
         day: `url('@/assets/bg-day.svg')`,
         night: `url('@/assets/bg-night.svg')`,
         sun: `url('@/assets/sun.svg')`,
-        moon: `url('@/assets/moon.svg')`
+        moon: `url('@/assets/moon.svg')`,
+        astronaut: `url('@/assets/postman-astronaut.svg')`
       }
     }
   },

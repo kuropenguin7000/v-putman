@@ -18,7 +18,16 @@ const httpStatusList = ref([
   { name: 'HEAD', color: 'text-[#6BDD9A]' },
   { name: 'OPTIONS', color: 'text-[#F15EB0]' }
 ])
+
+const hideProgressBar = () => {
+  store.$patch({
+    progressBar: false
+  })
+}
 const fetchAPI = () => {
+  store.$patch({
+    progressBar: true
+  })
   const success = (res: void) => {
     store.response = res
     toast.add({
@@ -27,6 +36,7 @@ const fetchAPI = () => {
       detail: 'Successfully get the response',
       life: 3000
     })
+    hideProgressBar()
   }
   const failed = () => {
     toast.add({
@@ -35,6 +45,7 @@ const fetchAPI = () => {
       detail: 'Please check the network tab for more detail',
       life: 3000
     })
+    hideProgressBar()
   }
   store.fetchTheApi(success, failed)
 }
@@ -69,6 +80,12 @@ const fetchAPI = () => {
       placeholder="Enter URL or paste text"
       class="w-full"
     />
-    <Button size="small" label="Send" class="w-32" @click="fetchAPI" />
+    <Button
+      size="small"
+      label="Send"
+      class="w-32"
+      :disabled="!store.endpoint"
+      @click="fetchAPI"
+    />
   </div>
 </template>

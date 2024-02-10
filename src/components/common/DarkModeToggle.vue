@@ -24,7 +24,7 @@ onMounted(() => {
     for="check"
     :class="`${
       isDarkMode ? 'bg-night' : 'bg-day'
-    } relative mb-5 block h-12 w-28 cursor-pointer rounded-full bg-cover bg-no-repeat`"
+    } relative mb-3 block h-12 w-28 cursor-pointer rounded-full bg-cover bg-no-repeat`"
   >
     <input
       id="check"

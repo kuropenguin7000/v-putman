@@ -5,8 +5,10 @@ import { getData } from '@/api'
 export const useCommonStore = defineStore('common', () => {
   const endpoint = ref<string>('')
   const response = ref()
+  const progressBar = ref(false)
 
   const getResponse = computed(() => response.value)
+  const isShowProgressBar = computed(() => progressBar.value)
 
   function fetchTheApi(
     success: (res: void) => void,
@@ -24,6 +26,8 @@ export const useCommonStore = defineStore('common', () => {
     endpoint,
     fetchTheApi,
     response,
-    getResponse
+    getResponse,
+    progressBar,
+    isShowProgressBar
   }
 })
