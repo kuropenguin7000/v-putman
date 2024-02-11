@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useCommonStore } from '@/stores/common'
+import { useToast } from 'primevue/usetoast'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Dropdown from 'primevue/dropdown'
-import { useToast } from 'primevue/usetoast'
 
 const toast = useToast()
 const store = useCommonStore()
@@ -18,6 +18,12 @@ const httpStatusList = ref([
   { name: 'HEAD', color: 'text-[#6BDD9A]' },
   { name: 'OPTIONS', color: 'text-[#F15EB0]' }
 ])
+
+watch(selectedHttpStatus, () => {
+  store.$patch({
+    httpMethod: selectedHttpStatus.value.name
+  })
+})
 
 const hideProgressBar = () => {
   store.$patch({

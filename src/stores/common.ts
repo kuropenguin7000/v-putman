@@ -8,10 +8,10 @@ export const useCommonStore = defineStore('common', () => {
   const response = ref()
   const progressBar = ref(false)
   const headers = ref<IHeader[]>([])
+  const httpMethod = ref('GET')
 
   const getResponse = computed(() => response.value)
   const isShowProgressBar = computed(() => progressBar.value)
-  const getHeaders = computed(() => headers.value)
 
   function constructHeaders(): Headers {
     const header = new Headers()
@@ -26,7 +26,7 @@ export const useCommonStore = defineStore('common', () => {
     success: (res: void) => void,
     failed: (res: void) => void
   ): void {
-    getData(endpoint.value, constructHeaders())
+    getData(endpoint.value, constructHeaders(), httpMethod.value)
       .then(res => success?.(res))
       .catch(error => {
         failed?.(error)
@@ -42,6 +42,6 @@ export const useCommonStore = defineStore('common', () => {
     progressBar,
     isShowProgressBar,
     headers,
-    getHeaders
+    httpMethod
   }
 })

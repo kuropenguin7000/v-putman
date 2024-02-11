@@ -20,7 +20,9 @@ const columns = [
 watch(
   () => headers.value.map(header => header.key),
   () => {
-    commonStore.headers = headers.value
+    commonStore.$patch({
+      headers: headers.value
+    })
   }
 )
 
