@@ -1,23 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useCommonStore } from '@/stores/common'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
+import type IHeader from '@/interfaces/IHeader'
 
-interface Headers {
-  key: string
-  value: string
-}
-
+const commonStore = useCommonStore()
 const headerKey = ref()
 const headerValue = ref()
-const headers = ref<Headers[]>([])
+const headers = ref<IHeader[]>([])
 const columns = [
   { field: 'key', header: 'Key' },
   { field: 'value', header: 'Value' },
   { field: 'remove', header: '' }
 ]
+
+watch(
+  () => headers.value.map(header => header.key),
+  () => {
+    commonStore.headers = headers.value
+  }
+)
+
 const removeRow = (key: string) => {
   const indexToRemove = headers.value.findIndex(obj => obj.key === key)
   if (indexToRemove !== -1) {
