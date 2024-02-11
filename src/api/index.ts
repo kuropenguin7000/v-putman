@@ -5,8 +5,6 @@ export const getData = async (
 ): Promise<void> => {
   const response: Response = await fetch(url, {
     method: httpMethod,
-    mode: 'cors',
-    credentials: 'same-origin',
     headers
   })
   return await response.json()
