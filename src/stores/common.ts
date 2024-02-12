@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { getData } from '@/api'
+import { getData, postData } from '@/api'
 import type IHeader from '@/interfaces/IHeader'
 
 export const useCommonStore = defineStore('common', () => {
@@ -9,12 +9,12 @@ export const useCommonStore = defineStore('common', () => {
   const progressBar = ref(false)
   const headers = ref<IHeader[]>([])
   const httpMethod = ref('GET')
+  const bodyRequest = ref('')
 
   const getResponse = computed(() => response.value)
   const isShowProgressBar = computed(() => progressBar.value)
 
-  function constructHeaders(): Headers {
-    const header = new Headers()
+  function constructHeaders(header: Headers): Headers {
     if (headers.value.length) {
       headers.value.forEach(h => {
         header.append(h.key, h.value)
@@ -26,12 +26,29 @@ export const useCommonStore = defineStore('common', () => {
     success: (res: void) => void,
     failed: (res: void) => void
   ): void {
-    getData(endpoint.value, constructHeaders(), httpMethod.value)
-      .then(res => success?.(res))
-      .catch(error => {
-        failed?.(error)
-        console.error(error)
-      })
+    switch (httpMethod.value) {
+      case 'GET':
+        getData(endpoint.value, constructHeaders(new Headers()))
+          .then(res => success?.(res))
+          .catch(error => {
+            failed?.(error)
+            console.error(error)
+          })
+        break
+      case 'POST': {
+        const header = new Headers()
+        header.append('Content-Type', 'application/json')
+        postData(endpoint.value, constructHeaders(header), bodyRequest.value)
+          .then(res => success?.(res))
+          .catch(error => {
+            failed?.(error)
+            console.error(error)
+          })
+        break
+      }
+      default:
+        progressBar.value = false
+    }
   }
 
   return {
@@ -42,6 +59,7 @@ export const useCommonStore = defineStore('common', () => {
     progressBar,
     isShowProgressBar,
     headers,
-    httpMethod
+    httpMethod,
+    bodyRequest
   }
 })

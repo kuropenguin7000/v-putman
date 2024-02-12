@@ -9,6 +9,7 @@ import PrimeVue from 'primevue/config'
 import Lara from './presets/lara'
 import 'primeicons/primeicons.css'
 import ToastService from 'primevue/toastservice'
+import { install as VueMonacoEditorPlugin } from '@guolao/vue-monaco-editor'
 
 const app = createApp(App)
 
@@ -19,6 +20,11 @@ app.use(PrimeVue, {
   pt: Lara
 })
 app.use(ToastService)
+app.use(VueMonacoEditorPlugin, {
+  paths: {
+    vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs'
+  }
+})
 
 app.directive('click-outside', clickOutside)
 
