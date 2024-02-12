@@ -1,5 +1,5 @@
-<script setup>
-import { ref, shallowRef, watch } from 'vue'
+<script setup lang="ts">
+import { ref, watch } from 'vue'
 import { useCommonStore } from '@/stores/common'
 
 const MONACO_EDITOR_OPTIONS = {
@@ -8,8 +8,6 @@ const MONACO_EDITOR_OPTIONS = {
   formatOnPaste: true
 }
 const code = ref()
-const editorRef = shallowRef()
-const handleMount = editor => (editorRef.value = editor)
 const commonStore = useCommonStore()
 
 watch(code, () => {
@@ -26,7 +24,6 @@ watch(code, () => {
       theme="vs-dark"
       :options="MONACO_EDITOR_OPTIONS"
       language="json"
-      @mount="handleMount"
     />
   </div>
 </template>
