@@ -1,6 +1,7 @@
 # v-putman
 
-This project emulates the functionalities of both [Postman](https://www.postman.com/) and [Google OAuth Playground](https://developers.google.com/oauthplayground/), serving as an API platform.
+This project emulates the functionalities of both [Postman](https://www.postman.com/)
+and [Google OAuth Playground](https://developers.google.com/oauthplayground/), serving as an API platform.
 
 demo: [Putman](https://v-putman.web.app/)
 ![image](https://github.com/kuropenguin7000/v-putman/assets/11885652/1d3346a0-1799-4596-8486-96a98380ca94)
@@ -12,6 +13,9 @@ demo: [Putman](https://v-putman.web.app/)
 - Http method PUT, PATCH, DELETE, HEAD, OPTIONS
 
 ## Project Setup
+
+node version: v20.10.0 <br>
+npm version: 10.2.3
 
 ```sh
 npm install
