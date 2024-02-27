@@ -4,6 +4,7 @@ import { getData, postData } from '@/api'
 import type IHeader from '@/interfaces/IHeader'
 
 export const useCommonStore = defineStore('common', () => {
+  // State
   const endpoint = ref<string>('')
   const response = ref()
   const progressBar = ref(false)
@@ -11,9 +12,11 @@ export const useCommonStore = defineStore('common', () => {
   const httpMethod = ref('GET')
   const bodyRequest = ref('')
 
+  // Getters
   const getResponse = computed(() => response.value)
   const isShowProgressBar = computed(() => progressBar.value)
 
+  // Actions
   function constructHeaders(header: Headers): Headers {
     if (headers.value.length) {
       headers.value.forEach(h => {

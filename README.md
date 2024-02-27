@@ -5,11 +5,11 @@ This project emulates the functionalities of both [Postman](https://www.postman.
 demo: [Putman](https://v-putman.web.app/)
 ![image](https://github.com/kuropenguin7000/v-putman/assets/11885652/1d3346a0-1799-4596-8486-96a98380ca94)
 
-## In progress items (not yet develop)
+## Still Under Construction
 
-- light mode
-- responsiveness (please use 1440 width screen)
-- http method PUT, PATCH, DELETE, HEAD, OPTIONS
+- Light mode
+- Responsiveness (Kindly utilize a screen width of 1440 pixels)
+- Http method PUT, PATCH, DELETE, HEAD, OPTIONS
 
 ## Project Setup
 
