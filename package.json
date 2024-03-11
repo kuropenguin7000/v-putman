@@ -55,5 +55,10 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ]
 }

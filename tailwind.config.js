@@ -29,11 +29,11 @@ export default {
         'surface-950': 'rgb(var(--surface-950))'
       },
       backgroundImage: {
-        day: `url('@/assets/bg-day.svg')`,
-        night: `url('@/assets/bg-night.svg')`,
-        sun: `url('@/assets/sun.svg')`,
-        moon: `url('@/assets/moon.svg')`,
-        astronaut: `url('@/assets/postman-astronaut.svg')`
+        day: `url('@/assets/image/bg-day.svg')`,
+        night: `url('@/assets/image/bg-night.svg')`,
+        sun: `url('@/assets/image/sun.svg')`,
+        moon: `url('@/assets/image/moon.svg')`,
+        astronaut: `url('@/assets/image/postman-astronaut.svg')`
       }
     }
   },
